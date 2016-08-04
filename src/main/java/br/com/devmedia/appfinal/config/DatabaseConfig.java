@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 @ComponentScan("br.com.devmedia.appfinal")
-@PropertySource("classpath:datasource.properties")
+@PropertySource("classpath:sql/datasource.properties")
 public class DatabaseConfig {
 
     @Value("${datasource.url}")
