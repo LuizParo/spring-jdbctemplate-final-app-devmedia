@@ -1,4 +1,4 @@
-package br.com.devmedia.appfinal.dao;
+package br.com.devmedia.appfinal.dao.impl;
 
 import java.util.List;
 
