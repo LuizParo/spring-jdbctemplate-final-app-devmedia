@@ -1,5 +1,6 @@
 package br.com.devmedia.appfinal.dao.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -10,7 +11,8 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
-final class BaseDao<T, PK> extends JdbcDaoSupport {
+final class BaseDao<T, PK> extends JdbcDaoSupport implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     public BaseDao(DataSource dataSource) {
         this.setDataSource(dataSource);

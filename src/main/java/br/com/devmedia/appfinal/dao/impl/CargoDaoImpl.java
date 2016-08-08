@@ -1,5 +1,6 @@
 package br.com.devmedia.appfinal.dao.impl;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -18,7 +19,9 @@ import br.com.devmedia.appfinal.entity.Cargo;
 import br.com.devmedia.appfinal.entity.Departamento;
 
 @Repository(value = "cargoDao")
-public class CargoDaoImpl implements CargoDao {
+public class CargoDaoImpl implements CargoDao, Serializable {
+    private static final long serialVersionUID = 1L;
+
     private BaseDao<Cargo, Integer> dao;
     
     @Autowired

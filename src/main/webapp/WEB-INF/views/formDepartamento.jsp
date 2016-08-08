@@ -6,10 +6,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="UTF-8" />
 		<title>Departamento</title>
 	</head>
 	<body>
+		<c:import url="menu.jsp" />
+	
 		<c:url value="/departamento" var="save" />
 		<form:form action="${save}" modelAttribute="departamento" method="post">
 			<form:hidden path="id"/>

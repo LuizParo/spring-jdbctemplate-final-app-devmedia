@@ -1,5 +1,6 @@
 package br.com.devmedia.appfinal.dao.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -15,7 +16,8 @@ import br.com.devmedia.appfinal.dao.DepartamentoDao;
 import br.com.devmedia.appfinal.entity.Departamento;
 
 @Repository(value = "departamentoDao")
-public class DepartamentoDaoImpl implements DepartamentoDao {
+public class DepartamentoDaoImpl implements DepartamentoDao, Serializable {
+    private static final long serialVersionUID = 1L;
     private static final Class<Departamento> CLAZZ = Departamento.class;
     private final BaseDao<Departamento, Integer> dao;
     
