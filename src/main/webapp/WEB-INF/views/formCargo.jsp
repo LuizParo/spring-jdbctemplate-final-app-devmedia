@@ -15,8 +15,8 @@
 		<c:url value="/cargo" var="save" />
 		<form:form action="${save}" modelAttribute="cargo" method="post">
 			<form:hidden path="id"/>
-			<fieldset style="width: 400px; margin: 0 auto;">
-				<legend>Cargo</legend>
+			<fieldset style="width: 500px; margin: 0 auto;">
+				<legend>Cargos</legend>
 				<div>
 					<form:label path="cargo">Cargo</form:label>
 					<form:input path="cargo" type="text" required="true" />
@@ -24,8 +24,9 @@
 				<br/>
 				<div>
 					<form:label path="departamento">Departamento</form:label>
+					<br/>
 					<form:select path="departamento" required="true">
-						<form:option value="0" label="--- Select ---" />
+						<form:option value="" label="--- Select ---" />
 						<form:options items="${departamentos}" itemValue="id" itemLabel="departamento" />
 					</form:select>
 				</div>
@@ -37,7 +38,7 @@
 			</fieldset>
 		</form:form>
 		
-		<fieldset style="width: 400px; margin: 0 auto;">
+		<fieldset style="width: 490px; margin: 0 auto;">
 			<legend>Cargos</legend>
 			<table style="width: 300px;">
 				<tr>

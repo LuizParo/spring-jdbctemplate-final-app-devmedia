@@ -16,7 +16,7 @@
 		<form:form action="${save}" modelAttribute="departamento" method="post">
 			<form:hidden path="id"/>
 			<fieldset style="width: 300px; margin: 0 auto;">
-				<legend>Departamento</legend>
+				<legend>Departamentos</legend>
 				<div>
 					<form:label path="departamento">Departamento</form:label>
 					<form:input path="departamento" type="text" required="true" />
