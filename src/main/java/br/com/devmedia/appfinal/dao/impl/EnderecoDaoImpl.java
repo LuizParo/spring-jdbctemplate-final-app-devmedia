@@ -10,10 +10,12 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.stereotype.Repository;
 
 import br.com.devmedia.appfinal.dao.EnderecoDao;
 import br.com.devmedia.appfinal.entity.Endereco;
 
+@Repository
 public class EnderecoDaoImpl implements EnderecoDao, Serializable {
     private static final long serialVersionUID = 1L;
     
