@@ -5,10 +5,14 @@
 <ul>
 	<c:url value="/departamento" var="formDepartamento" />
 	<c:url value="/cargo" var="formCargo" />
+	<c:url value="/funcionario" var="formFuncionario" />
 	<li>
 		<a href="${formDepartamento}" title="Departamentos">Departamentos</a>
 	</li>
 	<li>
 		<a href="${formCargo}" title="Cargo">Cargo</a>
+	</li>
+	<li>
+		<a href="${formFuncionario}" title="Funcionario">Funcionario</a>
 	</li>
 </ul>
