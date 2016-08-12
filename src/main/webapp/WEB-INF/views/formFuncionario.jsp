@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8" />
+		<meta charset="UTF-8" >
 		<title>Funcionário</title>
 		<style>
 			.master {
@@ -68,6 +68,7 @@
 					<br/>
 					<fieldset class="grupo">
 						<legend>Endereço</legend>
+						<form:hidden path="endereco.id"/>
 						<div class="campo">
 							<form:label path="endereco.logradouro">Logradouro</form:label><br/>
 							<form:input path="endereco.logradouro" type="text" size="30" />

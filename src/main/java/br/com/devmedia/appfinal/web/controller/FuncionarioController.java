@@ -48,13 +48,15 @@ public class FuncionarioController implements Serializable {
     @RequestMapping(method = RequestMethod.POST)
     public String save(@ModelAttribute("funcionario") Funcionario funcionario, BindingResult result) {
         this.funcionarioService.saveOrUpdate(funcionario);
-        
         return "redirect:/funcionario";
     }
     
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public ModelAndView preUpdate(@PathVariable("id") Integer id, ModelMap model) {
-        return new ModelAndView();
+        model.addAttribute("funcionario", this.funcionarioService.findById(id));
+        model.addAttribute("funcionarios", this.funcionarioService.findAll());
+        model.addAttribute("cargos", this.cargoService.findAll());
+        return new ModelAndView("formFuncionario");
     }
     
     @RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)

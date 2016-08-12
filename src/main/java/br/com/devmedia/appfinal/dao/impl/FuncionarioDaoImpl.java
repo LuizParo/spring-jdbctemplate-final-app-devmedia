@@ -39,17 +39,14 @@ public class FuncionarioDaoImpl implements FuncionarioDao, Serializable {
 
     @Override
     public SqlParameterSource parameterSource(Funcionario funcionario) {
-        MapSqlParameterSource source = new MapSqlParameterSource()
+        return new MapSqlParameterSource()
                 .addValue("nome", funcionario.getNome())
                 .addValue("salario", funcionario.getSalario())
-                .addValue("dataEntrada", Date.valueOf(funcionario.getDataEntrada()));
-        
-        if(funcionario.getDataSaida() != null) {
-            source.addValue("dataSaida", Date.valueOf(funcionario.getDataSaida()));
-        }
-        return source.addValue("id", funcionario.getId())
-            .addValue("id_cargo", funcionario.getCargo().getId())
-            .addValue("id_endereco", funcionario.getEndereco().getId());
+                .addValue("dataEntrada", Date.valueOf(funcionario.getDataEntrada()))
+                .addValue("dataSaida", funcionario.getDataSaida() != null ? Date.valueOf(funcionario.getDataSaida()) : null)
+                .addValue("id", funcionario.getId())
+                .addValue("idCargo", funcionario.getCargo().getId())
+                .addValue("idEndereco", funcionario.getEndereco().getId());
     }
 
     @Override
@@ -89,7 +86,7 @@ public class FuncionarioDaoImpl implements FuncionarioDao, Serializable {
     @Override
     public int update(Funcionario funcionario) {
         StringBuilder sql = new StringBuilder("UPDATE funcionario ");
-        sql.append("SET nome = :nome, salario = :salario, data_entrada = :dataEntrada, data_saida = :dataSaida ");
+        sql.append("SET nome = :nome, salario = :salario, data_entrada = :dataEntrada, data_saida = :dataSaida, ");
         sql.append("id_endereco = :idEndereco, id_cargo = :idCargo ");
         sql.append("WHERE id = :id");
         
