@@ -8,6 +8,24 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>Funcionário</title>
+		<style>
+			.master {
+				width: 960px; margin: 0 auto;
+			}
+			
+			.campo {
+				margin-bottom: 1em;
+			}
+			
+			.campo input:FOCUS, .campo select:FOCUS {
+				background: #f8f8f8;
+			}
+			
+			fieldset.grupo .campo {
+				float: left;
+				margin-right: 2em;
+			}
+		</style>
 	</head>
 	<body>
 		<c:import url="menu.jsp" />
@@ -19,19 +37,19 @@
 				<fieldset class="grupo">
 					<legend>Funcionário</legend>
 					<div class="campo">
-						<form:label path="nome">Nome</form:label>
+						<form:label path="nome">Nome</form:label><br/>
 						<form:input path="nome" type="text" size="40" />
 					</div>
 					<div class="campo">
-						<form:label path="salario">Salario</form:label>
+						<form:label path="salario">Salario</form:label><br/>
 						<form:input path="salario" type="text" size="20" />
 					</div>
 					<div class="campo">
-						<form:label path="dataEntrada">Data de Entrada</form:label>
-						<form:input path="dataEntrada" type="date" />
+						<form:label path="dataEntrada">Data de Entrada</form:label><br/>
+						<form:input type="date" path="dataEntrada" />
 					</div>
 					<div class="campo">
-						<form:label path="dataSaida">Data de Saída</form:label>
+						<form:label path="dataSaida">Data de Saída</form:label><br/>
 						<form:input path="dataSaida" type="date" />
 					</div>
 					
@@ -47,34 +65,36 @@
 						</div>
 					</fieldset>
 					
+					<br/>
 					<fieldset class="grupo">
 						<legend>Endereço</legend>
 						<div class="campo">
-							<form:label path="endereco.logradouro">Logradouro</form:label>
+							<form:label path="endereco.logradouro">Logradouro</form:label><br/>
 							<form:input path="endereco.logradouro" type="text" size="30" />
 						</div>
 						<div class="campo">
-							<form:label path="endereco.numero">Número</form:label>
+							<form:label path="endereco.numero">Número</form:label><br/>
 							<form:input path="endereco.numero" type="text" size="30" />
 						</div>
 						<div class="campo">
-							<form:label path="endereco.complemento">Complemento</form:label>
+							<form:label path="endereco.complemento">Complemento</form:label><br/>
 							<form:input path="endereco.complemento" type="text" size="30" />
 						</div>
 						<div class="campo">
-							<form:label path="endereco.bairro">Bairro</form:label>
+							<form:label path="endereco.bairro">Bairro</form:label><br/>
 							<form:input path="endereco.bairro" type="text" size="30" />
 						</div>
 						<div class="campo">
-							<form:label path="endereco.cidade">Cidade</form:label>
+							<form:label path="endereco.cidade">Cidade</form:label><br/>
 							<form:input path="endereco.cidade" type="text" size="30" />
 						</div>
 						<div class="campo">
-							<form:label path="endereco.estado">Estado</form:label>
+							<form:label path="endereco.estado">Estado</form:label><br/>
 							<form:input path="endereco.estado" type="text" size="30" />
 						</div>
 					</fieldset>
 					
+					<br/>
 					<div>
 						<input type="submit" value="Salvar" />
 						<input type="reset" value="Limpar" />

@@ -4,16 +4,27 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 public class Funcionario implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
     private String nome;
-    private LocalDate dataEntrada;
-    private LocalDate dataSaida;
-    private BigDecimal salario;
     private Cargo cargo;
     private Endereco endereco;
+    
+    @DateTimeFormat(iso = ISO.DATE, pattern = "dd/MM/yyyy")
+    private LocalDate dataEntrada;
+    
+    @DateTimeFormat(iso = ISO.DATE, pattern = "dd/MM/yyyy")
+    private LocalDate dataSaida;
+    
+    @NumberFormat(style = Style.CURRENCY, pattern = "###,###.00")
+    private BigDecimal salario;
 
     public Integer getId() {
         return id;

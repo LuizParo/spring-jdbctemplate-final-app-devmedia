@@ -16,7 +16,7 @@ public class CargoEditorSupport extends PropertyEditorSupport implements Seriali
     
     @Override
     public void setAsText(String text) throws IllegalArgumentException {
-        if(text.isEmpty()) {
+        if(!text.isEmpty()) {
             int id = Integer.parseInt(text);
             Cargo cargo = this.cargoService.findById(id);
             super.setValue(cargo);

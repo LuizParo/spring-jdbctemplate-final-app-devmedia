@@ -40,7 +40,7 @@ public class FuncionarioDaoImpl implements FuncionarioDao, Serializable {
     @Override
     public SqlParameterSource parameterSource(Funcionario funcionario) {
         MapSqlParameterSource source = new MapSqlParameterSource()
-                .addValue("nome", funcionario.getSalario())
+                .addValue("nome", funcionario.getNome())
                 .addValue("salario", funcionario.getSalario())
                 .addValue("dataEntrada", Date.valueOf(funcionario.getDataEntrada()));
         
@@ -59,7 +59,7 @@ public class FuncionarioDaoImpl implements FuncionarioDao, Serializable {
             @Override
             public Funcionario mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Cargo cargo = FuncionarioDaoImpl.this.cargoDao.findById(rs.getInt("id_cargo"));
-                Endereco endereco = FuncionarioDaoImpl.this.enderecoDao.findById(rs.getInt("id_departamento"));
+                Endereco endereco = FuncionarioDaoImpl.this.enderecoDao.findById(rs.getInt("id_endereco"));
                 
                 Funcionario funcionario = new Funcionario();
                 funcionario.setId(rs.getInt("id"));
@@ -105,12 +105,12 @@ public class FuncionarioDaoImpl implements FuncionarioDao, Serializable {
     @Override
     public Funcionario findById(Integer id) {
         String sql = "SELECT * FROM funcionario WHERE id = ?";
-        return this.dao.findById(sql , id, this.rowMapper());
+        return this.dao.findById(sql, id, this.rowMapper());
     }
     
     @Override
     public List<Funcionario> findAll() {
-        String sql = "SELECT * FROM funcionario WHERE id = ?";
+        String sql = "SELECT * FROM funcionario";
         return this.dao.findAll(sql, this.rowMapper());
     }
 }

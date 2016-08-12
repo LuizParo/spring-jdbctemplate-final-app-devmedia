@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.devmedia.appfinal.dao.FuncionarioDao;
+import br.com.devmedia.appfinal.entity.Endereco;
 import br.com.devmedia.appfinal.entity.Funcionario;
 
 @Service
@@ -16,7 +17,13 @@ public class FuncionarioService implements Serializable {
     @Autowired
     private FuncionarioDao dao;
     
+    @Autowired
+    private EnderecoService enderecoService;
+    
     public Funcionario saveOrUpdate(Funcionario funcionario) {
+        Endereco endereco = this.enderecoService.saveOrUpdate(funcionario.getEndereco());
+        funcionario.setEndereco(endereco);
+        
         if(funcionario.getId() == null) {
             this.dao.save(funcionario);
             return funcionario;

@@ -5,6 +5,7 @@ import java.io.Serializable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.devmedia.appfinal.entity.Cargo;
 import br.com.devmedia.appfinal.entity.Funcionario;
 import br.com.devmedia.appfinal.service.CargoService;
-import br.com.devmedia.appfinal.service.EnderecoService;
 import br.com.devmedia.appfinal.service.FuncionarioService;
 import br.com.devmedia.appfinal.web.editor.CargoEditorSupport;
 
@@ -30,9 +30,6 @@ public class FuncionarioController implements Serializable {
     
     @Autowired
     private CargoService cargoService;
-    
-    @Autowired
-    private EnderecoService enderecoService;
     
     @InitBinder
     public void initBinder(ServletRequestDataBinder binder) {
@@ -49,8 +46,10 @@ public class FuncionarioController implements Serializable {
     }
     
     @RequestMapping(method = RequestMethod.POST)
-    public String save(@ModelAttribute("funcionario") Funcionario funcionario) {
-        return "redirect:/funcionarios";
+    public String save(@ModelAttribute("funcionario") Funcionario funcionario, BindingResult result) {
+        this.funcionarioService.saveOrUpdate(funcionario);
+        
+        return "redirect:/funcionario";
     }
     
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
