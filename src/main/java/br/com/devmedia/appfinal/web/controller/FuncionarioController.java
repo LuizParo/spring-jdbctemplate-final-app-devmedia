@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.devmedia.appfinal.entity.Cargo;
 import br.com.devmedia.appfinal.entity.Funcionario;
 import br.com.devmedia.appfinal.service.CargoService;
+import br.com.devmedia.appfinal.service.EnderecoService;
 import br.com.devmedia.appfinal.service.FuncionarioService;
 import br.com.devmedia.appfinal.web.editor.CargoEditorSupport;
 
@@ -30,6 +31,9 @@ public class FuncionarioController implements Serializable {
     
     @Autowired
     private CargoService cargoService;
+
+    @Autowired
+    private EnderecoService enderecoService;
     
     @InitBinder
     public void initBinder(ServletRequestDataBinder binder) {
@@ -61,6 +65,9 @@ public class FuncionarioController implements Serializable {
     
     @RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
     public String remove(@PathVariable("id") Integer id) {
+        Funcionario funcionario = this.funcionarioService.findById(id);
+        this.enderecoService.remove(funcionario.getEndereco().getId());
+        
         this.funcionarioService.remove(id);
         return "redirect:/funcionario";
     }
