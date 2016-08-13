@@ -129,9 +129,9 @@
 							<fmt:parseDate value="${funcionario.dataEntrada}" var="dataEntrada" pattern="yyyy-MM-dd" />
 							<fmt:formatDate value="${dataEntrada}"/>
 						</td>
+						<td>
 							<fmt:parseDate value="${funcionario.dataSaida}" var="dataSaida" pattern="yyyy-MM-dd" />
 							<fmt:formatDate value="${dataSaida}"/>
-						<td>
 						</td>
 						<td>${funcionario.cargo.cargo}</td>
 						<td>
