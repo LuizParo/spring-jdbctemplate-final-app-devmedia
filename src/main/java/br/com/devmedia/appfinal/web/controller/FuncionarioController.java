@@ -80,4 +80,13 @@ public class FuncionarioController implements Serializable {
         
         return view;
     }
+    
+    @RequestMapping(value = "/find/nome/{nome}", method = RequestMethod.GET)
+    public ModelAndView findByNome(@PathVariable("nome") String nome, @ModelAttribute("funcionario") Funcionario funcionario) {
+        ModelAndView view = new ModelAndView("formFuncionario");
+        view.addObject("funcionarios", this.funcionarioService.findByNome(nome));
+        view.addObject("cargos", this.cargoService.findAll());
+        
+        return view;
+    }
 }

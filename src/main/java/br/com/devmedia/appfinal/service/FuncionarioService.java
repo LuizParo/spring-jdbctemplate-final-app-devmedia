@@ -55,4 +55,9 @@ public class FuncionarioService implements Serializable {
     public List<Funcionario> findByCargo(Integer idCargo) {
         return this.dao.findByCargo(idCargo);
     }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public List<Funcionario> findByNome(String nome) {
+        return this.dao.findByNome(nome);
+    }
 }

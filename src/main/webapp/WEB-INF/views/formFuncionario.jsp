@@ -39,6 +39,16 @@
 					window.location = 'http://localhost:8080/app-final/funcionario/find/cargo/' + value;
 				}
 			}
+			
+			function localizarPorNome() {
+				var value = document.getElementById('nome').value;
+				
+				if(value == '') {
+					window.location = 'http://localhost:8080/app-final/funcionario';
+				} else {
+					window.location = 'http://localhost:8080/app-final/funcionario/find/nome/' + value;
+				}
+			}
 		</script>
 	</head>
 	<body>
@@ -48,11 +58,12 @@
 			<c:url value="/funcionario" var="save" />
 			<form:form action="${save}" modelAttribute="funcionario" method="post">
 				<form:hidden path="id"/>
+				
 				<fieldset class="grupo">
 					<legend>Funcionário</legend>
 					<div class="campo">
 						<form:label path="nome">Nome</form:label><br/>
-						<form:input path="nome" type="text" size="40" />
+						<form:input path="nome" id="nome" type="text" size="40" />
 					</div>
 					<div class="campo">
 						<form:label path="salario">Salario</form:label><br/>
@@ -66,56 +77,57 @@
 						<form:label path="dataSaida">Data de Saída</form:label><br/>
 						<form:input path="dataSaida" type="date" />
 					</div>
+					<input type="button" onclick="localizarPorNome();" value="Localizar" />
+				</fieldset>
 					
-					<fieldset class="grupo">
-						<legend>Cargo</legend>
-						<div class="campo">
-							<form:label path="cargo">Cargo</form:label>
-							<br/>
-							<form:select id="cargo" path="cargo" required="true">
-								<form:option value="" label="--- Select ---" />
-								<form:options items="${cargos}" itemValue="id" itemLabel="cargo" />
-							</form:select>
-							<input type="button" onclick="localizarPorCargo();" value="Localizar">
-						</div>
-					</fieldset>
-					
-					<br/>
-					<fieldset class="grupo">
-						<legend>Endereço</legend>
-						<form:hidden path="endereco.id"/>
-						<div class="campo">
-							<form:label path="endereco.logradouro">Logradouro</form:label><br/>
-							<form:input path="endereco.logradouro" type="text" size="30" />
-						</div>
-						<div class="campo">
-							<form:label path="endereco.numero">Número</form:label><br/>
-							<form:input path="endereco.numero" type="text" size="30" />
-						</div>
-						<div class="campo">
-							<form:label path="endereco.complemento">Complemento</form:label><br/>
-							<form:input path="endereco.complemento" type="text" size="30" />
-						</div>
-						<div class="campo">
-							<form:label path="endereco.bairro">Bairro</form:label><br/>
-							<form:input path="endereco.bairro" type="text" size="30" />
-						</div>
-						<div class="campo">
-							<form:label path="endereco.cidade">Cidade</form:label><br/>
-							<form:input path="endereco.cidade" type="text" size="30" />
-						</div>
-						<div class="campo">
-							<form:label path="endereco.estado">Estado</form:label><br/>
-							<form:input path="endereco.estado" type="text" size="30" />
-						</div>
-					</fieldset>
-					
-					<br/>
-					<div>
-						<input type="submit" value="Salvar" />
-						<input type="reset" value="Limpar" />
+				<fieldset class="grupo">
+					<legend>Cargo</legend>
+					<div class="campo">
+						<form:label path="cargo">Cargo</form:label>
+						<br/>
+						<form:select id="cargo" path="cargo" required="true">
+							<form:option value="" label="--- Select ---" />
+							<form:options items="${cargos}" itemValue="id" itemLabel="cargo" />
+						</form:select>
+						<input type="button" onclick="localizarPorCargo();" value="Localizar" />
 					</div>
 				</fieldset>
+				
+				<br/>
+				<fieldset class="grupo">
+					<legend>Endereço</legend>
+					<form:hidden path="endereco.id"/>
+					<div class="campo">
+						<form:label path="endereco.logradouro">Logradouro</form:label><br/>
+						<form:input path="endereco.logradouro" type="text" size="30" />
+					</div>
+					<div class="campo">
+						<form:label path="endereco.numero">Número</form:label><br/>
+						<form:input path="endereco.numero" type="text" size="30" />
+					</div>
+					<div class="campo">
+						<form:label path="endereco.complemento">Complemento</form:label><br/>
+						<form:input path="endereco.complemento" type="text" size="30" />
+					</div>
+					<div class="campo">
+						<form:label path="endereco.bairro">Bairro</form:label><br/>
+						<form:input path="endereco.bairro" type="text" size="30" />
+					</div>
+					<div class="campo">
+						<form:label path="endereco.cidade">Cidade</form:label><br/>
+						<form:input path="endereco.cidade" type="text" size="30" />
+					</div>
+					<div class="campo">
+						<form:label path="endereco.estado">Estado</form:label><br/>
+						<form:input path="endereco.estado" type="text" size="30" />
+					</div>
+				</fieldset>
+				
+				<br/>
+				<div>
+					<input type="submit" value="Salvar" />
+					<input type="reset" value="Limpar" />
+				</div>
 			</form:form>
 		</fieldset>
 		

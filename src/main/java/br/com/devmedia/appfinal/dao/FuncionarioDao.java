@@ -17,4 +17,6 @@ public interface FuncionarioDao extends Dao<Funcionario> {
     public List<Funcionario> findAll();
 
     public List<Funcionario> findByCargo(Integer idCargo);
+
+    public List<Funcionario> findByNome(String nome);
 }
