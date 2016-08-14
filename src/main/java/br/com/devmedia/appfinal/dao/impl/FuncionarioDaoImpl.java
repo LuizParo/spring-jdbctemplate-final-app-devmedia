@@ -110,4 +110,10 @@ public class FuncionarioDaoImpl implements FuncionarioDao, Serializable {
         String sql = "SELECT * FROM funcionario";
         return this.dao.findAll(sql, this.rowMapper());
     }
+    
+    @Override
+    public List<Funcionario> findByCargo(Integer idCargo) {
+        String sql = "SELECT * FROM funcionario WHERE id_cargo = :idCargo";
+        return this.dao.namedQuery().query(sql, new MapSqlParameterSource("idCargo", idCargo), this.rowMapper());
+    }
 }

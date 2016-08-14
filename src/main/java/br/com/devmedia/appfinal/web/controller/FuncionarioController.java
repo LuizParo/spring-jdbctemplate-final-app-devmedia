@@ -71,4 +71,13 @@ public class FuncionarioController implements Serializable {
         this.funcionarioService.remove(id);
         return "redirect:/funcionario";
     }
+    
+    @RequestMapping(value = "/find/cargo/{idCargo}", method = RequestMethod.GET)
+    public ModelAndView findByCargo(@PathVariable("idCargo") Integer idCargo, @ModelAttribute("funcionario") Funcionario funcionario) {
+        ModelAndView view = new ModelAndView("formFuncionario");
+        view.addObject("funcionarios", this.funcionarioService.findByCargo(idCargo));
+        view.addObject("cargos", this.cargoService.findAll());
+        
+        return view;
+    }
 }

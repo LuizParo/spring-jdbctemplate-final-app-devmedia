@@ -27,6 +27,19 @@
 				margin-right: 2em;
 			}
 		</style>
+		
+		<script type="text/javascript">
+			function localizarPorCargo() {
+				var id = document.getElementById('cargo');
+				var value = id.options[id.selectedIndex].value;
+				
+				if(value == '') {
+					window.location = 'http://localhost:8080/app-final/funcionario';
+				} else {
+					window.location = 'http://localhost:8080/app-final/funcionario/find/cargo/' + value;
+				}
+			}
+		</script>
 	</head>
 	<body>
 		<c:import url="menu.jsp" />
@@ -59,10 +72,11 @@
 						<div class="campo">
 							<form:label path="cargo">Cargo</form:label>
 							<br/>
-							<form:select path="cargo" required="true">
+							<form:select id="cargo" path="cargo" required="true">
 								<form:option value="" label="--- Select ---" />
 								<form:options items="${cargos}" itemValue="id" itemLabel="cargo" />
 							</form:select>
+							<input type="button" onclick="localizarPorCargo();" value="Localizar">
 						</div>
 					</fieldset>
 					
@@ -123,15 +137,15 @@
 						<td>${funcionario.nome}</td>
 						<td>
 							<fmt:formatNumber value="${funcionario.salario}" currencySymbol="R$"
-								maxFractionDigits="2" pattern="###,###.00" />
+								maxFractionDigits="2" type="currency" />
 						</td>
 						<td>
 							<fmt:parseDate value="${funcionario.dataEntrada}" var="dataEntrada" pattern="yyyy-MM-dd" />
-							<fmt:formatDate value="${dataEntrada}"/>
+							<fmt:formatDate value="${dataEntrada}" dateStyle="medium"/>
 						</td>
 						<td>
 							<fmt:parseDate value="${funcionario.dataSaida}" var="dataSaida" pattern="yyyy-MM-dd" />
-							<fmt:formatDate value="${dataSaida}"/>
+							<fmt:formatDate value="${dataSaida}" dateStyle="medium"/>
 						</td>
 						<td>${funcionario.cargo.cargo}</td>
 						<td>
