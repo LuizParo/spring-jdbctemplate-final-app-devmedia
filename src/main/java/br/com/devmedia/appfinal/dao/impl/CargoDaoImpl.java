@@ -88,4 +88,17 @@ public class CargoDaoImpl implements CargoDao, Serializable {
         String sql = "SELECT * FROM cargo";
         return this.dao.findAll(sql, this.rowMapper());
     }
+    
+    @Override
+    public List<Cargo> findByPage(int page, int size) {
+        String sql = "SELECT * FROM cargo LIMIT :page, :size";
+        return this.dao
+                .namedQuery()
+                .query(sql , new MapSqlParameterSource("page", page).addValue("size", size), this.rowMapper());
+    }
+    
+    @Override
+    public int count() {
+        return this.dao.count("cargo", int.class);
+    }
 }

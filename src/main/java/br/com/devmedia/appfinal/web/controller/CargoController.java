@@ -23,6 +23,8 @@ import br.com.devmedia.appfinal.web.editor.DepartamentoEditorSupport;
 @RequestMapping(value = "cargo")
 public class CargoController implements Serializable {
     private static final long serialVersionUID = 1L;
+    private static final int PAGE_DEFAULT = 1;
+    private static final int PAGE_SIZE_DEFAULT = 5;
 
     @Autowired
     private CargoService cargoService;
@@ -37,8 +39,11 @@ public class CargoController implements Serializable {
     
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView form(@ModelAttribute("cargo") Cargo cargo, ModelMap model) {
-        model.addAttribute("cargos", this.cargoService.findAll());
+        model.addAttribute("cargos", this.cargoService.findByPage(PAGE_DEFAULT, PAGE_SIZE_DEFAULT));
         model.addAttribute("departamentos", this.departamentoService.findAll());
+        model.addAttribute("current", PAGE_DEFAULT);
+        model.addAttribute("total", this.cargoService.getTotalPages(PAGE_SIZE_DEFAULT));
+        
         return new ModelAndView("formCargo", model);
     }
     
@@ -52,8 +57,10 @@ public class CargoController implements Serializable {
     public ModelAndView preUpdate(@PathVariable("id") Integer id) {
         ModelAndView view = new ModelAndView("formCargo");
         view.addObject("cargo", this.cargoService.findById(id));
-        view.addObject("cargos", this.cargoService.findAll());
+        view.addObject("cargos", this.cargoService.findByPage(PAGE_DEFAULT, PAGE_SIZE_DEFAULT));
         view.addObject("departamentos", this.departamentoService.findAll());
+        view.addObject("current", PAGE_DEFAULT);
+        view.addObject("total", this.cargoService.getTotalPages(PAGE_SIZE_DEFAULT));
         
         return view;
     }
@@ -62,5 +69,16 @@ public class CargoController implements Serializable {
     public String remove(@PathVariable("id") Integer id) {
         this.cargoService.remove(id);
         return "redirect:/cargo";
+    }
+    
+    @RequestMapping(value = "/page/{page}")
+    public ModelAndView pagination(@PathVariable("page") Integer page, @ModelAttribute("cargo") Cargo cargo) {
+        ModelAndView view = new ModelAndView("formCargo");
+        view.addObject("departamentos", this.departamentoService.findAll());
+        view.addObject("cargos", this.cargoService.findByPage(page, PAGE_SIZE_DEFAULT));
+        view.addObject("current", page);
+        view.addObject("total", this.cargoService.getTotalPages(PAGE_SIZE_DEFAULT));
+        
+        return view;
     }
 }

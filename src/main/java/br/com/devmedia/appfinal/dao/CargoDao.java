@@ -15,4 +15,8 @@ public interface CargoDao extends Dao<Cargo> {
     public Cargo findById(Integer id);
 
     public List<Cargo> findAll();
+
+    public List<Cargo> findByPage(int page, int size);
+
+    public int count();
 }

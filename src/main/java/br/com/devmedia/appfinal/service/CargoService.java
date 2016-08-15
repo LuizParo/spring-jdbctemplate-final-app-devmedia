@@ -42,4 +42,15 @@ public class CargoService implements Serializable {
     public List<Cargo> findAll() {
         return this.dao.findAll();
     }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public List<Cargo> findByPage(int page, int size) {
+        return this.dao.findByPage((page - 1) * size, size);
+    }
+    
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public int getTotalPages(int size) {
+        int count = this.dao.count();
+        return (int) Math.ceil(new Double(count) / new Double(size));
+    }
 }

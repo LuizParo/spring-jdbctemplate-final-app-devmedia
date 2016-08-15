@@ -44,4 +44,8 @@ final class BaseDao<T, PK> extends JdbcDaoSupport implements Serializable {
     public List<T> findAll(String sql, RowMapper<T> rowMapper) {
         return this.getJdbcTemplate().query(sql, rowMapper);
     }
+    
+    public int count(String tableName, Class<Integer> requiredType) {
+        return this.getJdbcTemplate().queryForObject("SELECT COUNT(0) FROM " + tableName, requiredType);
+    }
 }
