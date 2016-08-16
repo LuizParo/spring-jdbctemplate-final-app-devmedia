@@ -3,6 +3,7 @@ package br.com.devmedia.appfinal.service;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -15,6 +16,7 @@ import br.com.devmedia.appfinal.entity.Departamento;
 @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
 public class DepartamentoService implements Serializable {
     private static final long serialVersionUID = 1L;
+    private static final Logger LOGGER = Logger.getLogger(DepartamentoService.class);
 
     @Autowired
     private DepartamentoDao dao;
@@ -22,8 +24,10 @@ public class DepartamentoService implements Serializable {
     @Transactional(readOnly = false)
     public Departamento saveOrUpdate(Departamento departamento) {
         if(departamento.getId() == null) {
+            LOGGER.info("Salvando um Departamento!");
             return this.dao.save(departamento);
-        } 
+        }
+        LOGGER.info("Alterando um Departamento!");
         this.dao.update(departamento);
         return departamento;
     }

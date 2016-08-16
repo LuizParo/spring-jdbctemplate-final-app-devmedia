@@ -2,6 +2,7 @@ package br.com.devmedia.appfinal.web.controller;
 
 import java.io.Serializable;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,12 +19,14 @@ import br.com.devmedia.appfinal.service.DepartamentoService;
 @RequestMapping("departamento")
 public class DepartamentoController implements Serializable {
     private static final long serialVersionUID = 1L;
+    private static final Logger LOGGER = Logger.getLogger(DepartamentoController.class);
 
     @Autowired
     private DepartamentoService service;
     
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView findAll(@ModelAttribute("departamento") Departamento departamento, ModelMap model) {
+        LOGGER.info("Acesso realizao à URL '/departamento'");
         model.addAttribute("departamentos", this.service.findAll());
         return new ModelAndView("formDepartamento", model);
     }
