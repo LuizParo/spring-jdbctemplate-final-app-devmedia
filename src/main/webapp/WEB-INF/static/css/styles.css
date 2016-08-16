@@ -1,0 +1,16 @@
+.master {
+	width: 960px; margin: 0 auto;
+}
+
+.campo {
+	margin-bottom: 1em;
+}
+
+.campo input:FOCUS, .campo select:FOCUS {
+	background: #f8f8f8;
+}
+
+fieldset.grupo .campo {
+	float: left;
+	margin-right: 2em;
+}

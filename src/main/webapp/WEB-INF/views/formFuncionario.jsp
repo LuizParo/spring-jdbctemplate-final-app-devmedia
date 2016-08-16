@@ -9,47 +9,9 @@
 	<head>
 		<meta charset="UTF-8" >
 		<title>Funcionário</title>
-		<style>
-			.master {
-				width: 960px; margin: 0 auto;
-			}
-			
-			.campo {
-				margin-bottom: 1em;
-			}
-			
-			.campo input:FOCUS, .campo select:FOCUS {
-				background: #f8f8f8;
-			}
-			
-			fieldset.grupo .campo {
-				float: left;
-				margin-right: 2em;
-			}
-		</style>
 		
-		<script type="text/javascript">
-			function localizarPorCargo() {
-				var id = document.getElementById('cargo');
-				var value = id.options[id.selectedIndex].value;
-				
-				if(value == '') {
-					window.location = 'http://localhost:8080/app-final/funcionario';
-				} else {
-					window.location = 'http://localhost:8080/app-final/funcionario/find/cargo/' + value;
-				}
-			}
-			
-			function localizarPorNome() {
-				var value = document.getElementById('nome').value;
-				
-				if(value == '') {
-					window.location = 'http://localhost:8080/app-final/funcionario';
-				} else {
-					window.location = 'http://localhost:8080/app-final/funcionario/find/nome/' + value;
-				}
-			}
-		</script>
+		<script type="text/javascript" src="<c:url value="/js/functions.js" />"></script>
+		<link rel="stylesheet" type="text/css" href="<c:url value="/css/styles.css" />" >
 	</head>
 	<body>
 		<c:import url="menu.jsp" />
