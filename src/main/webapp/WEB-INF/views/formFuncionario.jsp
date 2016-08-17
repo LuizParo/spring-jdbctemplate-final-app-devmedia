@@ -19,6 +19,7 @@
 		<fieldset class="master">
 			<c:url value="/funcionario" var="save" />
 			<form:form action="${save}" modelAttribute="funcionario" method="post">
+				<form:errors cssClass="errorblock" path="*" element="div" />
 				<form:hidden path="id"/>
 				
 				<fieldset class="grupo">
@@ -47,7 +48,7 @@
 					<div class="campo">
 						<form:label path="cargo">Cargo</form:label>
 						<br/>
-						<form:select id="cargo" path="cargo" required="true">
+						<form:select id="cargo" path="cargo">
 							<form:option value="" label="--- Select ---" />
 							<form:options items="${cargos}" itemValue="id" itemLabel="cargo" />
 						</form:select>

@@ -2,10 +2,12 @@ package br.com.devmedia.appfinal.web.controller;
 
 import java.io.Serializable;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,12 +21,14 @@ import br.com.devmedia.appfinal.entity.Funcionario;
 import br.com.devmedia.appfinal.service.CargoService;
 import br.com.devmedia.appfinal.service.EnderecoService;
 import br.com.devmedia.appfinal.service.FuncionarioService;
+import br.com.devmedia.appfinal.validator.FuncionarioValidator;
 import br.com.devmedia.appfinal.web.editor.CargoEditorSupport;
 
 @Controller
 @RequestMapping(value = "funcionario")
 public class FuncionarioController implements Serializable {
     private static final long serialVersionUID = 1L;
+    private static final Logger LOGGER = Logger.getLogger(FuncionarioController.class);
 
     @Autowired
     private FuncionarioService funcionarioService;
@@ -38,6 +42,7 @@ public class FuncionarioController implements Serializable {
     @InitBinder
     public void initBinder(ServletRequestDataBinder binder) {
         binder.registerCustomEditor(Cargo.class, new CargoEditorSupport(this.cargoService));
+        binder.addValidators(new FuncionarioValidator());
     }
     
     @RequestMapping(method = RequestMethod.GET)
@@ -50,9 +55,25 @@ public class FuncionarioController implements Serializable {
     }
     
     @RequestMapping(method = RequestMethod.POST)
-    public String save(@ModelAttribute("funcionario") Funcionario funcionario, BindingResult result) {
-        this.funcionarioService.saveOrUpdate(funcionario);
-        return "redirect:/funcionario";
+    public ModelAndView save(@ModelAttribute("funcionario") @Validated Funcionario funcionario, BindingResult result) {
+        ModelAndView view = new ModelAndView("redirect:/funcionario");
+        
+        if(result.hasErrors()) {
+            LOGGER.warn("Foram encontrados campos inválidos!");
+            view.addObject("funcionarios", this.funcionarioService.findAll());
+            view.addObject("cargos", this.cargoService.findAll());
+            view.setViewName("formFuncionario");
+            return view;
+        }
+        
+        try {
+            LOGGER.info("Executando saveOrUpdate para funcionário!");
+            this.funcionarioService.saveOrUpdate(funcionario);
+            LOGGER.info("Funcionário " + funcionario.getId() + " persistido com sucesso!");
+        } catch (Exception e) {
+            LOGGER.error("Um erro ao inserir/alterar um funcionário!", e);
+        }
+        return view;
     }
     
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
