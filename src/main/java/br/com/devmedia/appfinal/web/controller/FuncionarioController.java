@@ -21,6 +21,7 @@ import br.com.devmedia.appfinal.entity.Funcionario;
 import br.com.devmedia.appfinal.service.CargoService;
 import br.com.devmedia.appfinal.service.EnderecoService;
 import br.com.devmedia.appfinal.service.FuncionarioService;
+import br.com.devmedia.appfinal.validator.EnderecoValidator;
 import br.com.devmedia.appfinal.validator.FuncionarioValidator;
 import br.com.devmedia.appfinal.web.editor.CargoEditorSupport;
 
@@ -42,7 +43,7 @@ public class FuncionarioController implements Serializable {
     @InitBinder
     public void initBinder(ServletRequestDataBinder binder) {
         binder.registerCustomEditor(Cargo.class, new CargoEditorSupport(this.cargoService));
-        binder.addValidators(new FuncionarioValidator());
+        binder.addValidators(new FuncionarioValidator(new EnderecoValidator()));
     }
     
     @RequestMapping(method = RequestMethod.GET)

@@ -12,6 +12,11 @@ import br.com.devmedia.appfinal.entity.Funcionario;
 
 public class FuncionarioValidator implements Validator, Serializable {
     private static final long serialVersionUID = 1L;
+    private EnderecoValidator enderecoValidator;
+
+    public FuncionarioValidator(EnderecoValidator enderecoValidator) {
+        this.enderecoValidator = enderecoValidator;
+    }
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -48,5 +53,7 @@ public class FuncionarioValidator implements Validator, Serializable {
         if(funcionario.getCargo() == null) {
             errors.rejectValue("cargo", "error.cargo", "O campo Cargo é obrigatório!");
         }
+        
+        ValidationUtils.invokeValidator(this.enderecoValidator, funcionario.getEndereco(), errors);
     }
 }
