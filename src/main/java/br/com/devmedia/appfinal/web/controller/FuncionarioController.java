@@ -1,6 +1,7 @@
 package br.com.devmedia.appfinal.web.controller;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ import br.com.devmedia.appfinal.service.FuncionarioService;
 import br.com.devmedia.appfinal.validator.EnderecoValidator;
 import br.com.devmedia.appfinal.validator.FuncionarioValidator;
 import br.com.devmedia.appfinal.web.editor.CargoEditorSupport;
+import br.com.devmedia.appfinal.web.editor.StringToBigDecimalEditorSupport;
+import br.com.devmedia.appfinal.web.editor.StringToIntegerEditorSupport;
 
 @Controller
 @RequestMapping(value = "funcionario")
@@ -43,6 +46,8 @@ public class FuncionarioController implements Serializable {
     @InitBinder
     public void initBinder(ServletRequestDataBinder binder) {
         binder.registerCustomEditor(Cargo.class, new CargoEditorSupport(this.cargoService));
+        binder.registerCustomEditor(Integer.class, "endereco.numero", new StringToIntegerEditorSupport());
+        binder.registerCustomEditor(BigDecimal.class, "salario", new StringToBigDecimalEditorSupport());
         binder.addValidators(new FuncionarioValidator(new EnderecoValidator()));
     }
     
