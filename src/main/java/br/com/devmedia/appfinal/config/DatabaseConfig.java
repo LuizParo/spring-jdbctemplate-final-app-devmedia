@@ -13,6 +13,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.jndi.JndiTemplate;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -71,5 +74,14 @@ public class DatabaseConfig {
             LOGGER.error("Erro ao fazer lookup do recurso: java:comp/env/jdbc/appfinal", e);
             throw new RuntimeException(e.getMessage(), e);
         }
+    }
+    
+    //@Bean
+    public EmbeddedDatabase embeddedDatabase() {
+        return new EmbeddedDatabaseBuilder()
+                .setType(EmbeddedDatabaseType.H2)
+                .addScript("classpath:/h2/schema.sql")
+                .addScript("classpath:/h2/data.sql")
+                .build();
     }
 }
